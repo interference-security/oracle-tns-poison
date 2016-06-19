@@ -33,11 +33,22 @@ def main(targetHost, targetPort):
     print "\n[*] Recevied following data:\n"
     res = s.recv(8192)
     print res + "\n"
-    print "[+] Perform the following checks:"
+    hex_res = ':'.join(x.encode('hex') for x in res)
+    #print hex_res
+    tns_state_res = hex_res.split(":")[4]
+    #print tns_state_res
+    print "[+] Perform the following checks (for port 1521 only):"
     print "\t[+] Check in tshark/wireshark for TNS packets."
-    print "\t\t[-] Target is vulnerable if TNS packet has ACCEPT"
-    print "\t\t[-] Target is not vulnerable if TNS packet has REFUSE"
-    print "\t[-] Target is not vulnerable if there are no TNS packets"
+    print "\t\t[-] Target is vulnerable if TNS packet has ACCEPT."
+    print "\t\t[-] Target is not vulnerable if TNS packet has REFUSE."
+    if tns_state_res == "02":
+        print "\n[+] Found 'Accept' in the received response."
+        print "\t[-] Target is vulnerable."
+    elif tns_state_res == "04":
+        print "\n[+] Found 'Refuse' in the received response."
+        print "\t[-] Target is not vulnerable."
+    else:
+        print "\n[!] Unknown TNS packet type."
     s.close()
 
 def showTnsError(res):
