@@ -4,7 +4,9 @@ Based on the work published here: http://seclists.org/fulldisclosure/2012/Apr/20
 ##How to check for this vulnerability
 
 Execute “check_tns_poison.py” with the following command-line arguments:
+
 Target Host: IP address or Hostname of target
+
 Target Port: Port number running Oracle TNS Listener
 ```
 Usage:   python check_tns_poison.py <target_host> <target_port>
