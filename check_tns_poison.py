@@ -17,7 +17,7 @@ from libtns import *
 
 def main(targetHost, targetPort):
 
-    print "[*] In another terminal execute the following command (replace eth0 with your network interface):"
+    print "[*] [Optional] In another terminal execute the following command (replace eth0 with your network interface):"
     #print "\ttshark -i eth0 -f 'host " + targetHost + " and tcp port " + str(targetPort) + "'"
     print "\ttshark -i eth0 -f 'host %s and tcp port %s'" % (targetHost, targetPort)
     raw_input("\nPress [Enter] to continue")
